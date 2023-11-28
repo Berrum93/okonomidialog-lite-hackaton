@@ -1,7 +1,6 @@
-import React from "react";
+import React, { FC } from "react";
+import { Utgift } from "../api/types";
 
-const Utgifter = () => {
+export const Utgifter: FC = () => {
   return <div>{"Utgifter"}</div>;
 };
-
-export default Utgifter;
