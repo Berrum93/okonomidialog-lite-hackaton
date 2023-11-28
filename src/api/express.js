@@ -1,5 +1,6 @@
 // server.js
 import express from "express";
+import cors from "cors";
 
 const inntekter = [{ belop: 123, type: "lønn" }];
 const utgifter = [{ belop: 123, type: "livsopphold" }];
@@ -15,6 +16,7 @@ const datamodell = {
 };
 
 const app = express();
+app.use(cors());
 const port = 3000;
 
 app.get("/", (req, res) => {
