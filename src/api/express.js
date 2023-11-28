@@ -1,11 +1,10 @@
 // server.js
 import express from "express";
-import { Inntekt, Utgift, DataModel } from "./types";
 
-const inntekter: Inntekt[] = [{ belop: 123, type: "lønn" }];
-const utgifter: Utgift[] = [{ belop: 123, type: "livsopphold" }];
+const inntekter = [{ belop: 123, type: "lønn" }];
+const utgifter = [{ belop: 123, type: "livsopphold" }];
 
-const datamodell: DataModel = {
+const datamodell = {
   name: "datamodell",
   age: 25,
   inntekter: inntekter,
