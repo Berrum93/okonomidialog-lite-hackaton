@@ -1,18 +1,16 @@
 import React from "react";
-import { Inntekt } from "../api/types";
+import { useAtom } from "jotai";
+import { dataAtom } from "../App";
 
-interface InntekterProps {
+const Inntekter: React.FC = () => {
+  const [data] = useAtom(dataAtom); // use the atom in your component
 
-  inntekter: Inntekt[] | undefined;
-}
-
-const Inntekter: React.FC<InntekterProps> = ({ inntekter }) => {
   return (
     <div>
-      {inntekter?.map((inntektData, index) => (
+      {data?.inntekter?.map((inntekt, index) => (
         <div key={index}>
-          <p>Inntekt: {inntektData.type}</p>
-          <p>Beløp: {inntektData.belop}</p>
+          <p>Inntekt: {inntekt.type}</p>
+          <p>Beløp: {inntekt.belop}</p>
         </div>
       ))}
     </div>

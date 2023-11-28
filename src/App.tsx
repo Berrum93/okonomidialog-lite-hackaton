@@ -1,11 +1,14 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { DataModel } from "./api/types";
 import Inntekter from "./components/inntekter";
 import Resultat from "./components/resultat";
 import { Utgifter } from "./components/utgifter";
+import { atom, useAtom } from "jotai";
+
+export const dataAtom = atom<DataModel | null>(null);
 
 export const App = () => {
-  const [data, setData] = useState<DataModel | null>(null); // Add data state
+  const [, setData] = useAtom(dataAtom);
 
   useEffect(() => {
     fetchData();
@@ -24,7 +27,7 @@ export const App = () => {
 
   return (
     <div>
-      <Inntekter inntekter={data?.inntekter} />
+      <Inntekter />
       <Resultat />
       <Utgifter />
     </div>
