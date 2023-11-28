@@ -18,6 +18,7 @@
     "@skatteetaten/ds-core-designtokens": "^0.5.0-c-ff031b13.feature-FRONT-1161-TopBanner-utvikle-komponent-SNAPSHOT",
     "@skatteetaten/ds-forms": "^0.5.0-c-ff031b13.feature-FRONT-1161-TopBanner-utvikle-komponent-SNAPSHOT",
     "@skatteetaten/ds-icons": "^0.5.0-c-ff031b13.feature-FRONT-1161-TopBanner-utvikle-komponent-SNAPSHOT",
+    "@skatteetaten/ds-collections": "^0.5.0-c-ff031b13.feature-FRONT-1161-TopBanner-utvikle-komponent-SNAPSHOT",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "jotai": "^2.6.0",
