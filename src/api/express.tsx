@@ -1,25 +1,6 @@
 // server.js
 import express from "express";
-
-type Inntekt = {
-  belop: number;
-  type: string;
-};
-
-type Utgift = {
-  belop: number;
-  type: string;
-};
-
-type DataModel = {
-  name: string;
-  age: number;
-  inntekter: Inntekt[];
-  utgifter: Utgift[];
-  totalInntekt: number;
-  totalUtgift: number;
-  resultat: number;
-};
+import { Inntekt, Utgift, DataModel } from "./types";
 
 const inntekter: Inntekt[] = [{ belop: 123, type: "lønn" }];
 const utgifter: Utgift[] = [{ belop: 123, type: "livsopphold" }];
