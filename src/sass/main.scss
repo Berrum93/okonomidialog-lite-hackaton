@@ -1,3 +1,7 @@
+@import './styles//inntekter.scss';
+@import './styles//utgifter.scss';
+@import 'variables';
+
 body {
   margin: 0;
   padding: 0;
@@ -7,4 +11,25 @@ body {
   color: #333;
   background-color: #ffffff;
   box-sizing: border-box;
+}
+
+// Media Queries
+.container {
+  width: 100%; // default width
+
+  @media (min-width: $breakpoint-small) {
+    width: 540px; // width for small devices
+  }
+
+  @media (min-width: $breakpoint-medium) {
+    width: 720px; // width for medium devices
+  }
+
+  @media (min-width: $breakpoint-large) {
+    width: 960px; // width for large devices
+  }
+
+  @media (min-width: $breakpoint-extra-large) {
+    width: 1140px; // width for extra large devices
+  }
 }
