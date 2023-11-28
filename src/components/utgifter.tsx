@@ -1,6 +1,6 @@
-import React, { FC } from "react";
-import { Utgift } from "../api/types";
+import { FC } from 'react';
+// import { Utgift } from '../api/types';
 
 export const Utgifter: FC = () => {
-  return <div>{"Utgifter"}</div>;
+  return <div>{'Utgifter'}</div>;
 };
