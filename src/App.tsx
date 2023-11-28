@@ -4,6 +4,7 @@ import Inntekter from "./components/inntekter";
 import Resultat from "./components/resultat";
 import { Utgifter } from "./components/utgifter";
 import { atom, useAtom } from "jotai";
+import '@skatteetaten/ds-core-designtokens/index.css';
 
 export const dataAtom = atom<DataModel | null>(null);
 
