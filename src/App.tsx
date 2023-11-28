@@ -4,10 +4,9 @@ import Inntekter from "./components/inntekter";
 import Resultat from "./components/resultat";
 import { Utgifter } from "./components/utgifter";
 
-
 export const App = () => {
   const [data, setData] = useState<DataModel | null>(null); // Add data state
-  
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -15,9 +14,9 @@ export const App = () => {
   const fetchData = async () => {
     try {
       const response = await fetch("http://localhost:3000");
-      const fetchedData: DataModel = await response.json();
+      const fetchedData = await response.json();
       setData(fetchedData); // Set the fetched data to the data state
-      console.log(fetchedData);
+      console.log("Data: " + fetchedData);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
