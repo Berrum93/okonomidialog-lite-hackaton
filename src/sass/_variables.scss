@@ -1,0 +1,30 @@
+// Font
+$font-family: Arial, sans-serif;
+$font-size-base: 16px;
+$font-weight-normal: normal;
+$font-weight-bold: bold;
+
+// Colors
+$color-primary: #007bff;
+$color-secondary: #6c757d;
+$color-success: #28a745;
+$color-danger: #dc3545;
+$color-warning: #ffc107;
+$color-info: #17a2b8;
+
+// Color Hovers
+$color-primary-hover: darken($color-primary, 10%);
+$color-secondary-hover: darken($color-secondary, 10%);
+$color-success-hover: darken($color-success, 10%);
+$color-danger-hover: darken($color-danger, 10%);
+$color-warning-hover: darken($color-warning, 10%);
+$color-info-hover: darken($color-info, 10%);
+
+// Container Width
+$container-width: 1200px;
+
+// Breakpoints
+$breakpoint-small: 576px; // Small devices (landscape phones, less than 576px)
+$breakpoint-medium: 768px; // Medium devices (tablets, less than 768px)
+$breakpoint-large: 992px; // Large devices (desktops, less than 992px)
+$breakpoint-extra-large: 1200px; // Extra large devices (large desktops, less than 1200px)
