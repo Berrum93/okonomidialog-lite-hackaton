@@ -1,26 +1,18 @@
-import { ChangeEvent, FC, useEffect, useState } from "react";
+import { ChangeEvent, FC, useEffect } from "react";
 import { useAtom } from "jotai";
-import { dataAtom } from "../App"; // import the atom from where it's defined
+import { dataAtom, totalUtgifterAtom } from "../App"; // import the atom from where it's defined
 import { TextField } from "@skatteetaten/ds-forms";
 import { Utgift } from "../api/types";
 
 export const Utgifter: FC = () => {
   const [data, setData] = useAtom(dataAtom); // use the atom in your component
-  const [totalUtgifter, setTotalUtgifter] = useState(0);
+  const [totalUtgifter] = useAtom(totalUtgifterAtom);
 
   useEffect(() => {
     if (data !== null) {
       setData({ ...data, utgifter: sortUtgifter(data.utgifter) });
     }
   }, []);
-
-  useEffect(() => {
-    if (data !== null) {
-      setTotalUtgifter(calculateTotalUtgifter(data.utgifter));
-      console.log("Data:", data);
-      console.log("Total utgifter:", totalUtgifter);
-    }
-  }, [data]);
 
   const handleInputChange = (
     event: ChangeEvent<HTMLInputElement>,
@@ -46,10 +38,6 @@ export const Utgifter: FC = () => {
       }
       return 0;
     });
-  };
-
-  const calculateTotalUtgifter = (utgifter: Utgift[]): number => {
-    return utgifter.reduce((total, utgift) => total + utgift.belop, 0);
   };
 
   if (data === null) {
