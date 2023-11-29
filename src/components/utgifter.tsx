@@ -1,7 +1,7 @@
-import { ChangeEvent, FC } from "react";
-import { useAtom } from "jotai";
-import { dataAtom } from "../App"; // import the atom from where it's defined
-import { TextField } from "@skatteetaten/ds-forms";
+import { ChangeEvent, FC } from 'react';
+import { useAtom } from 'jotai';
+import { dataAtom } from '../App'; // import the atom from where it's defined
+import { TextField } from '@skatteetaten/ds-forms';
 
 export const Utgifter: FC = () => {
   const [data, setData] = useAtom(dataAtom); // use the atom in your component

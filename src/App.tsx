@@ -61,9 +61,10 @@ export const App = () => {
 
         {activeStep >= 2 && (
           <StepList.Step
+            className='utgifterStep'
             id={`${stepId}-2`}
-            variant={activeStep === 2 ? "active" : "passive"}
-            title={"Utgifter"}
+            variant={activeStep === 2 ? 'active' : 'passive'}
+            title={'Utgifter'}
             stepNumber={2}
             onEdit={
               activeStep > 2 && activeStep < 4
@@ -75,7 +76,6 @@ export const App = () => {
             <Utgifter />
           </StepList.Step>
         )}
-
         {activeStep >= 3 && (
           <StepList.Step
             id={`${stepId}-3`}
@@ -99,7 +99,9 @@ export const App = () => {
             stepNumber={4}
             introTitleAs={"h4"}
           >
-            Vi har oppdatert dine inntekter og utgifter.
+            Vi har mottat dine endringer av inntekter og utgifter.
+            <br />
+            Det kan ta noen dager før det er helt oppdatert hos oss
           </StepList.Step>
         )}
       </StepList>
