@@ -18,7 +18,7 @@ export const App = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("https://wfq4ctzd-5173.euw.devtunnels.ms/");
+      const response = await fetch("https://wfq4ctzd-3000.euw.devtunnels.ms/");
       const fetchedData = await response.json();
       setData(fetchedData); // Set the fetched data to the data state
       console.log("Data: " + fetchedData);
