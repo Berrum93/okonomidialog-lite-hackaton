@@ -27,26 +27,7 @@ export const App = () => {
     };
 
     fetchData();
-    if (data !== null) {
-      const sortedUtgifter = sortUtgifter(data.utgifter);
-      const updatedData = { ...data, utgifter: sortedUtgifter };
-      setData(updatedData);
-    }
-  }, [data, setData]);
-
-  const sortUtgifter = (utgifter: Utgift[]) => {
-    return [...utgifter].sort((a, b) => {
-      if (a.type < b.type) {
-        return -1;
-      }
-      if (a.type > b.type) {
-        return 1;
-      }
-      return 0;
-    });
-  };
-
-  // rest of your code
+  }, []);
 
   const stepId = useId();
   const [activeStep, setActiveStep] = useState(1);
@@ -67,7 +48,7 @@ export const App = () => {
           <StepList.Step
             id={`${stepId}-1`}
             variant={activeStep === 1 ? "active" : "passive"}
-            title={"Hva holder du på med?"}
+            title={"Inntekter"}
             stepNumber={1}
             onEdit={
               activeStep > 1 && activeStep < 4
@@ -76,15 +57,27 @@ export const App = () => {
             }
             onNext={onNext}
           >
-            <Inntekter />
+            {activeStep === 1 && <Inntekter />}
+            {activeStep > 1 && (
+              <div>
+                <p>
+                  Totale inntekter:{" "}
+                  {data?.inntekter.reduce(
+                    (acc, inntekt) => acc + inntekt.belop,
+                    0
+                  )}
+                </p>
+              </div>
+            )}
           </StepList.Step>
         )}
 
         {activeStep >= 2 && (
           <StepList.Step
+            className="utgifterStep"
             id={`${stepId}-2`}
             variant={activeStep === 2 ? "active" : "passive"}
-            title={"Hva gjør du?"}
+            title={"Utgifter"}
             stepNumber={2}
             onEdit={
               activeStep > 2 && activeStep < 4
@@ -93,10 +86,20 @@ export const App = () => {
             }
             onNext={onNext}
           >
-            <Utgifter />
+            {activeStep === 2 && <Utgifter />}
+            {activeStep > 2 && (
+              <div>
+                <p>
+                  Totale utgifter:{" "}
+                  {data?.utgifter.reduce(
+                    (acc, utgift) => acc + utgift.belop,
+                    0
+                  )}
+                </p>
+              </div>
+            )}
           </StepList.Step>
         )}
-
         {activeStep >= 3 && (
           <StepList.Step
             id={`${stepId}-3`}
@@ -110,6 +113,19 @@ export const App = () => {
             }}
           >
             <Resultat />
+          </StepList.Step>
+        )}
+        {activeStep >= 4 && step3 === true && (
+          <StepList.Step
+            id={`${stepId}-4`}
+            title={"Dine endringer er nå lagret."}
+            variant={"positiveResult"}
+            stepNumber={4}
+            introTitleAs={"h4"}
+          >
+            Vi har mottat dine endringer av inntekter og utgifter.
+            <br />
+            Det kan ta noen dager før det er helt oppdatert hos oss
           </StepList.Step>
         )}
       </StepList>
