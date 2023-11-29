@@ -1,5 +1,5 @@
 import { useEffect, useState, useId } from "react";
-import { DataModel, Utgift } from "./api/types";
+import { DataModel } from "./api/types";
 import Inntekter from "./components/inntekter";
 import Resultat from "./components/resultat";
 import { Utgifter } from "./components/utgifter";
@@ -10,7 +10,7 @@ import "@skatteetaten/ds-core-designtokens/index.css";
 export const dataAtom = atom<DataModel | null>(null);
 
 export const App = () => {
-  const [data, setData] = useAtom(dataAtom);
+  const [, setData] = useAtom(dataAtom);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,26 +27,7 @@ export const App = () => {
     };
 
     fetchData();
-    if (data !== null) {
-      const sortedUtgifter = sortUtgifter(data.utgifter);
-      const updatedData = { ...data, utgifter: sortedUtgifter };
-      setData(updatedData);
-    }
-  }, [data, setData]);
-
-  const sortUtgifter = (utgifter: Utgift[]) => {
-    return [...utgifter].sort((a, b) => {
-      if (a.type < b.type) {
-        return -1;
-      }
-      if (a.type > b.type) {
-        return 1;
-      }
-      return 0;
-    });
-  };
-
-  // rest of your code
+  }, []);
 
   const stepId = useId();
   const [activeStep, setActiveStep] = useState(1);

@@ -1,10 +1,17 @@
-import { ChangeEvent, FC } from "react";
+import { ChangeEvent, FC, useEffect } from "react";
 import { useAtom } from "jotai";
 import { dataAtom } from "../App"; // import the atom from where it's defined
 import { TextField } from "@skatteetaten/ds-forms";
+import { Utgift } from "../api/types";
 
 export const Utgifter: FC = () => {
   const [data, setData] = useAtom(dataAtom); // use the atom in your component
+
+  useEffect(() => {
+    if (data !== null) {
+      setData({ ...data, utgifter: sortUtgifter(data.utgifter) });
+    }
+  }, [data]);
 
   const handleInputChange = (
     event: ChangeEvent<HTMLInputElement>,
@@ -17,6 +24,22 @@ export const Utgifter: FC = () => {
       setData({ ...data, utgifter: updatedUtgifter });
     }
   };
+
+  const sortUtgifter = (utgifter: Utgift[]) => {
+    return [...utgifter].sort((a, b) => {
+      if (a.type < b.type) {
+        return -1;
+      }
+      if (a.type > b.type) {
+        return 1;
+      }
+      return 0;
+    });
+  };
+
+  if (data === null) {
+    return <div>Loading</div>;
+  }
 
   return (
     <div>
