@@ -20,7 +20,6 @@ export const Utgifter: FC = () => {
 
   return (
     <div>
-      <h2>Utgifter</h2>
       {data?.utgifter?.map((utgift, index) => {
         return (
           <div key={index}>
@@ -28,12 +27,12 @@ export const Utgifter: FC = () => {
             <p>Beløp: {utgift.belop}</p>
 
             <TextField
-              label="Endre beløp"
+              label='Endre beløp'
               onChange={(event: ChangeEvent<HTMLInputElement>) =>
                 handleInputChange(event, index)
               }
               thousandSeparator={true}
-              placeholder="Hei"
+              placeholder='Hei'
               value={utgift.belop}
             />
           </div>
