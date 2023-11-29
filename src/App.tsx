@@ -33,26 +33,7 @@ export const App = () => {
     };
 
     fetchData();
-    if (data !== null) {
-      const sortedUtgifter = sortUtgifter(data.utgifter);
-      const updatedData = { ...data, utgifter: sortedUtgifter };
-      setData(updatedData);
-    }
   }, [data, setData]);
-
-  const sortUtgifter = (utgifter: Utgift[]) => {
-    return [...utgifter].sort((a, b) => {
-      if (a.type < b.type) {
-        return -1;
-      }
-      if (a.type > b.type) {
-        return 1;
-      }
-      return 0;
-    });
-  };
-
-  // rest of your code
 
   const stepId = useId();
   const [activeStep, setActiveStep] = useState(1);
