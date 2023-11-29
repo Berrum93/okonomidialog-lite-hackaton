@@ -1,5 +1,5 @@
 import { useEffect, useState, useId } from "react";
-import { DataModel } from "./api/types";
+import { DataModel, Utgift } from "./api/types";
 import Inntekter from "./components/inntekter";
 import Resultat from "./components/resultat";
 import { Utgifter } from "./components/utgifter";
@@ -13,19 +13,40 @@ export const App = () => {
   const [data, setData] = useAtom(dataAtom);
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://wfq4ctzd-3000.euw.devtunnels.ms/"
+        );
+        const fetchedData = await response.json();
+        setData(fetchedData); // Set the fetched data to the data state
+        console.log("Data: " + fetchedData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch("https://wfq4ctzd-3000.euw.devtunnels.ms/");
-      const fetchedData = await response.json();
-      setData(fetchedData); // Set the fetched data to the data state
-      console.log("Data: " + fetchedData);
-    } catch (error) {
-      console.error("Error fetching data:", error);
+    fetchData();
+    if (data !== null) {
+      const sortedUtgifter = sortUtgifter(data.utgifter);
+      const updatedData = { ...data, utgifter: sortedUtgifter };
+      setData(updatedData);
     }
+  }, [data, setData]);
+
+  const sortUtgifter = (utgifter: Utgift[]) => {
+    return [...utgifter].sort((a, b) => {
+      if (a.type < b.type) {
+        return -1;
+      }
+      if (a.type > b.type) {
+        return 1;
+      }
+      return 0;
+    });
   };
+
+  // rest of your code
 
   const stepId = useId();
   const [activeStep, setActiveStep] = useState(1);
