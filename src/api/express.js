@@ -2,7 +2,11 @@
 import express from "express";
 import cors from "cors";
 
-const inntekter = [{ belop: 123, type: "lønn" }];
+const inntekter = [
+  { belop: 123, type: "lønn" },
+  { belop: 456, type: "bonus" },
+  { belop: 789, type: "dividende" }
+];
 const utgifter = [{ belop: 123, type: "livsopphold" }];
 
 const datamodell = {
