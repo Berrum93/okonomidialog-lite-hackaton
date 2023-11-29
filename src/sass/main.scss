@@ -12,10 +12,13 @@ body {
   background-color: #ffffff;
   box-sizing: border-box;
 }
-
+.StepListStep-module_stepContent__F22-U {
+  flex-direction: column;
+}
 // Media Queries
 .container {
   width: 100%; // default width
+  margin: 5rem auto;
 
   @media (min-width: $breakpoint-small) {
     width: 540px; // width for small devices

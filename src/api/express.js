@@ -7,7 +7,14 @@ const inntekter = [
   { belop: 456, type: "bonus" },
   { belop: 789, type: "dividende" }
 ];
-const utgifter = [{ belop: 123, type: "livsopphold" }];
+const utgifter = [
+  { belop: 100, type: "mat" },
+  { belop: 200, type: "transport" },
+  { belop: 300, type: "helse" },
+  { belop: 123, type: "livsopphold" },
+  { belop: 456, type: "husleie" },
+  { belop: 789, type: "strømregning" },
+];
 
 const datamodell = {
   name: "datamodell",
