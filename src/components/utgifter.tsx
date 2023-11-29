@@ -20,9 +20,6 @@ export const Utgifter: FC = () => {
 
   return (
     <div>
-      <div>
-        <p>Totale utgifter: {data?.utgifter.reduce((acc, utgift) => acc + utgift.belop, 0)}</p>
-      </div>
       {data?.utgifter?.map((utgift, index) => {
         return (
           <div key={index}>
