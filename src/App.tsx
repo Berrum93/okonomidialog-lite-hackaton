@@ -33,7 +33,7 @@ export const App = () => {
     };
 
     fetchData();
-  }, [data, setData]);
+  }, []);
 
   const stepId = useId();
   const [activeStep, setActiveStep] = useState(1);
