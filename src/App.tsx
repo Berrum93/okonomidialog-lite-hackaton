@@ -1,5 +1,5 @@
 import { useEffect, useState, useId } from "react";
-import { DataModel, Utgift } from "./api/types";
+import { DataModel } from "./api/types";
 import Inntekter from "./components/inntekter";
 import Resultat from "./components/resultat";
 import { Utgifter } from "./components/utgifter";
