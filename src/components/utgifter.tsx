@@ -1,8 +1,8 @@
-import { ChangeEvent, FC, useEffect } from "react";
-import { useAtom } from "jotai";
-import { dataAtom, totalUtgifterAtom } from "../App"; // import the atom from where it's defined
-import { TextField } from "@skatteetaten/ds-forms";
-import { Utgift } from "../api/types";
+import { ChangeEvent, FC, useEffect } from 'react';
+import { useAtom } from 'jotai';
+import { dataAtom, totalUtgifterAtom } from '../App'; // import the atom from where it's defined
+import { TextField } from '@skatteetaten/ds-forms';
+import { Utgift } from '../api/types';
 
 export const Utgifter: FC = () => {
   const [data, setData] = useAtom(dataAtom); // use the atom in your component
@@ -18,8 +18,8 @@ export const Utgifter: FC = () => {
     event: ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
-    const value = event.target.value.replace(/\s/g, ""); // Remove spaces from the value
-    const belop = value === "" ? 0 : parseInt(value);
+    const value = event.target.value.replace(/\s/g, ''); // Remove spaces from the value
+    const belop = value === '' ? 0 : parseInt(value);
 
     if (data !== null) {
       const updatedUtgifter = [...data.utgifter];
@@ -53,12 +53,12 @@ export const Utgifter: FC = () => {
             <p>Beløp: {utgift.belop}</p>
 
             <TextField
-              label="Endre beløp"
+              label='Endre beløp'
               onChange={(event: ChangeEvent<HTMLInputElement>) =>
                 handleInputChange(event, index)
               }
               thousandSeparator={true}
-              placeholder="Hei"
+              placeholder='Hei'
               value={utgift.belop}
             />
           </div>
