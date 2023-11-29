@@ -1,11 +1,11 @@
-import { useEffect, useState, useId } from 'react';
-import { DataModel } from './api/types';
-import Inntekter from './components/inntekter';
-import Resultat from './components/resultat';
-import { Utgifter } from './components/utgifter';
-import { atom, useAtom } from 'jotai';
-import { StepList } from '@skatteetaten/ds-collections';
-import '@skatteetaten/ds-core-designtokens/index.css';
+import { useEffect, useState, useId } from "react";
+import { DataModel, Utgift } from "./api/types";
+import Inntekter from "./components/inntekter";
+import Resultat from "./components/resultat";
+import { Utgifter } from "./components/utgifter";
+import { atom, useAtom } from "jotai";
+import { StepList } from "@skatteetaten/ds-collections";
+import "@skatteetaten/ds-core-designtokens/index.css";
 
 export const dataAtom = atom<DataModel | null>(null);
 
@@ -13,19 +13,40 @@ export const App = () => {
   const [data, setData] = useAtom(dataAtom);
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://wfq4ctzd-3000.euw.devtunnels.ms/"
+        );
+        const fetchedData = await response.json();
+        setData(fetchedData); // Set the fetched data to the data state
+        console.log("Data: " + fetchedData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch('https://wfq4ctzd-3000.euw.devtunnels.ms/');
-      const fetchedData = await response.json();
-      setData(fetchedData); // Set the fetched data to the data state
-      console.log('Data: ' + fetchedData);
-    } catch (error) {
-      console.error('Error fetching data:', error);
+    fetchData();
+    if (data !== null) {
+      const sortedUtgifter = sortUtgifter(data.utgifter);
+      const updatedData = { ...data, utgifter: sortedUtgifter };
+      setData(updatedData);
     }
+  }, [data, setData]);
+
+  const sortUtgifter = (utgifter: Utgift[]) => {
+    return [...utgifter].sort((a, b) => {
+      if (a.type < b.type) {
+        return -1;
+      }
+      if (a.type > b.type) {
+        return 1;
+      }
+      return 0;
+    });
   };
+
+  // rest of your code
 
   const stepId = useId();
   const [activeStep, setActiveStep] = useState(1);
@@ -40,13 +61,13 @@ export const App = () => {
   };
 
   return (
-    <div className='container'>
+    <div className="container">
       <StepList>
         {activeStep >= 1 && (
           <StepList.Step
             id={`${stepId}-1`}
-            variant={activeStep === 1 ? 'active' : 'passive'}
-            title={'Inntekter'}
+            variant={activeStep === 1 ? "active" : "passive"}
+            title={"Inntekter"}
             stepNumber={1}
             onEdit={
               activeStep > 1 && activeStep < 4
@@ -68,10 +89,10 @@ export const App = () => {
 
         {activeStep >= 2 && (
           <StepList.Step
-            className='utgifterStep'
+            className="utgifterStep"
             id={`${stepId}-2`}
-            variant={activeStep === 2 ? 'active' : 'passive'}
-            title={'Utgifter'}
+            variant={activeStep === 2 ? "active" : "passive"}
+            title={"Utgifter"}
             stepNumber={2}
             onEdit={
               activeStep > 2 && activeStep < 4
@@ -94,8 +115,8 @@ export const App = () => {
         {activeStep >= 3 && (
           <StepList.Step
             id={`${stepId}-3`}
-            variant={activeStep === 3 ? 'active' : 'passive'}
-            title={'Oppsummering'}
+            variant={activeStep === 3 ? "active" : "passive"}
+            title={"Oppsummering"}
             stepNumber={3}
             onNext={(): void => {
               if (step3) {
@@ -109,10 +130,10 @@ export const App = () => {
         {activeStep >= 4 && step3 === true && (
           <StepList.Step
             id={`${stepId}-4`}
-            title={'Dine endringer er nå lagret.'}
-            variant={'positiveResult'}
+            title={"Dine endringer er nå lagret."}
+            variant={"positiveResult"}
             stepNumber={4}
-            introTitleAs={'h4'}
+            introTitleAs={"h4"}
           >
             Vi har mottat dine endringer av inntekter og utgifter.
             <br />
