@@ -25,6 +25,9 @@ const Inntekter: React.FC = () => {
 
   return (
     <div>
+      <div>
+        <p>Totale inntekter: {data?.inntekter.reduce((acc, inntekt) => acc + inntekt.belop, 0)}</p>
+      </div>
       {data?.inntekter?.map((inntekt, index) => (
         <div key={index}>
           <p>Inntekt: {inntekt.type}</p>

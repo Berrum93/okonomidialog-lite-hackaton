@@ -10,7 +10,7 @@ import '@skatteetaten/ds-core-designtokens/index.css';
 export const dataAtom = atom<DataModel | null>(null);
 
 export const App = () => {
-  const [, setData] = useAtom(dataAtom);
+  const [data, setData] = useAtom(dataAtom);
 
   useEffect(() => {
     fetchData();
@@ -55,7 +55,14 @@ export const App = () => {
             }
             onNext={onNext}
           >
-            <Inntekter />
+            { activeStep === 1 &&
+              <Inntekter />
+            }
+            { activeStep > 1 &&
+              <div>
+                <p>Totale inntekter: {data?.inntekter.reduce((acc, inntekt) => acc + inntekt.belop, 0)}</p>
+              </div>
+            }
           </StepList.Step>
         )}
 
@@ -73,7 +80,15 @@ export const App = () => {
             }
             onNext={onNext}
           >
-            <Utgifter />
+            
+            { activeStep === 2 &&
+              <Utgifter />
+            }
+            { activeStep > 2 &&
+              <div>
+                <p>Totale utgifter: {data?.utgifter.reduce((acc, utgift) => acc + utgift.belop, 0)}</p>
+              </div>
+            }
           </StepList.Step>
         )}
         {activeStep >= 3 && (
