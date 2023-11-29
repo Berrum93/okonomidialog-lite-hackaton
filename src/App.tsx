@@ -1,5 +1,5 @@
 import { useEffect, useState, useId } from "react";
-import { DataModel, Utgift } from "./api/types";
+import { DataModel } from "./api/types";
 import Inntekter from "./components/inntekter";
 import Resultat from "./components/resultat";
 import { Utgifter } from "./components/utgifter";
@@ -8,6 +8,12 @@ import { StepList } from "@skatteetaten/ds-collections";
 import "@skatteetaten/ds-core-designtokens/index.css";
 
 export const dataAtom = atom<DataModel | null>(null);
+
+export const totalUtgifterAtom = atom((get) => {
+  const data = get(dataAtom);
+  if (data === null) return null;
+  return data.utgifter.reduce((total, utgift) => total + utgift.belop, 0);
+});
 
 export const App = () => {
   const [data, setData] = useAtom(dataAtom);
