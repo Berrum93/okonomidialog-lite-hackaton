@@ -6,31 +6,39 @@ import { TextField } from "@skatteetaten/ds-forms";
 export const Utgifter: FC = () => {
   const [data, setData] = useAtom(dataAtom); // use the atom in your component
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleInputChange = (
+    event: ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
     const { value } = event.target;
     if (data !== null) {
-      setData({ ...data, age: value as unknown as number });
+      const updatedUtgifter = [...data.utgifter];
+      updatedUtgifter[index].belop = value as unknown as number;
+      setData({ ...data, utgifter: updatedUtgifter });
     }
   };
 
   return (
     <div>
       <h2>Utgifter</h2>
-      {data?.utgifter?.map((utgift, index) => (
-        <div key={index}>
-          <p>Type: {utgift.type}</p>
-          <p>Beløp: {utgift.belop}</p>
-          <p>Beløp: {data.age}</p>
-        </div>
-      ))}
-      <TextField
-        label="Type"
-        onChange={handleInputChange}
-        thousandSeparator={true}
-        placeholder="Hei"
-        value={data?.age}
-      />
+      {data?.utgifter?.map((utgift, index) => {
+        return (
+          <div key={index}>
+            <p>Type: {utgift.type}</p>
+            <p>Beløp: {utgift.belop}</p>
+
+            <TextField
+              label="Endre beløp"
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                handleInputChange(event, index)
+              }
+              thousandSeparator={true}
+              placeholder="Hei"
+              value={utgift.belop}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 };
