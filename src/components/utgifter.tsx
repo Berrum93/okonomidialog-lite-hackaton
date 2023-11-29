@@ -1,7 +1,7 @@
-import { ChangeEvent, FC } from 'react';
-import { useAtom } from 'jotai';
-import { dataAtom } from '../App'; // import the atom from where it's defined
-import { TextField } from '@skatteetaten/ds-forms';
+import { ChangeEvent, FC } from "react";
+import { useAtom } from "jotai";
+import { dataAtom } from "../App"; // import the atom from where it's defined
+import { TextField } from "@skatteetaten/ds-forms";
 
 export const Utgifter: FC = () => {
   const [data, setData] = useAtom(dataAtom); // use the atom in your component
@@ -27,12 +27,12 @@ export const Utgifter: FC = () => {
             <p>Beløp: {utgift.belop}</p>
 
             <TextField
-              label='Endre beløp'
+              label="Endre beløp"
               onChange={(event: ChangeEvent<HTMLInputElement>) =>
                 handleInputChange(event, index)
               }
               thousandSeparator={true}
-              placeholder='Hei'
+              placeholder="Hei"
               value={utgift.belop}
             />
           </div>

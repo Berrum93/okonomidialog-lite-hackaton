@@ -5,7 +5,7 @@ import cors from "cors";
 const inntekter = [
   { belop: 123, type: "lønn" },
   { belop: 456, type: "bonus" },
-  { belop: 789, type: "dividende" }
+  { belop: 789, type: "dividende" },
 ];
 const utgifter = [
   { belop: 100, type: "mat" },
