@@ -32,7 +32,7 @@ export const combinedTotalAtom = atom((get) => {
     0
   );
 
-  return totalUtgift + totalInntekt;
+  return totalUtgift - totalInntekt;
 });
 
 export const App = () => {
