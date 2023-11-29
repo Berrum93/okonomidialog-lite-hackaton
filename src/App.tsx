@@ -13,21 +13,19 @@ export const App = () => {
   const [data, setData] = useAtom(dataAtom);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://wfq4ctzd-3000.euw.devtunnels.ms/"
-        );
-        const fetchedData = await response.json();
-        setData(fetchedData); // Set the fetched data to the data state
-        console.log("Data: " + fetchedData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
     fetchData();
   }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch("https://wfq4ctzd-3000.euw.devtunnels.ms/");
+      const fetchedData = await response.json();
+      setData(fetchedData); // Set the fetched data to the data state
+      console.log("Data: " + fetchedData);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   const stepId = useId();
   const [activeStep, setActiveStep] = useState(1);
