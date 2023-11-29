@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState, useId } from 'react';
 import { DataModel } from './api/types';
 import Inntekter from './components/inntekter';
 import Resultat from './components/resultat';
@@ -27,39 +27,71 @@ export const App = () => {
     }
   };
 
+  const stepId = useId();
+  const [activeStep, setActiveStep] = useState(1);
+  const step3 = true;
+  const onNext = (): void => {
+    const nextStep = activeStep + 1;
+    setActiveStep(nextStep);
+    setTimeout((): void => {
+      const el = document.getElementById(`${stepId}-${nextStep}-focus-target`);
+      el?.focus();
+    }, 0);
+  };
+
   return (
-    <div>
+    <div className='container'>
       <StepList>
-        <StepList.Step
-          title={'Inntekter'}
-          id={'step-1'}
-          onEdit={() => console.log('trykket på endre knapp')}
-          editButtonText={'egendefinert tekst'}
-          stepNumber={1}
-        >
-          <Inntekter />
-        </StepList.Step>
-        <StepList.Step
-          title={'Utgifter'}
-          id={'step-2'}
-          onEdit={() => console.log('trykket på endre knapp')}
-          editButtonText={'egendefinert tekst'}
-          stepNumber={2}
-        >
-          <Utgifter />
-        </StepList.Step>
-        <StepList.Step
-          title={'Resultat'}
-          id={'step-3'}
-          onEdit={() => console.log('trykket på endre knapp')}
-          editButtonText={'egendefinert tekst'}
-          stepNumber={3}
-        >
-          {' '}
-          <Resultat />
-        </StepList.Step>
+        {activeStep >= 1 && (
+          <StepList.Step
+            id={`${stepId}-1`}
+            variant={activeStep === 1 ? 'active' : 'passive'}
+            title={'Hva holder du på med?'}
+            stepNumber={1}
+            onEdit={
+              activeStep > 1 && activeStep < 4
+                ? (): void => setActiveStep(1)
+                : undefined
+            }
+            onNext={onNext}
+          >
+            <Inntekter />
+          </StepList.Step>
+        )}
+
+        {activeStep >= 2 && (
+          <StepList.Step
+            id={`${stepId}-2`}
+            variant={activeStep === 2 ? 'active' : 'passive'}
+            title={'Hva gjør du?'}
+            stepNumber={2}
+            onEdit={
+              activeStep > 2 && activeStep < 4
+                ? (): void => setActiveStep(2)
+                : undefined
+            }
+            onNext={onNext}
+          >
+            <Utgifter />
+          </StepList.Step>
+        )}
+
+        {activeStep >= 3 && (
+          <StepList.Step
+            id={`${stepId}-3`}
+            variant={activeStep === 3 ? 'active' : 'passive'}
+            title={'Oppsummering'}
+            stepNumber={3}
+            onNext={(): void => {
+              if (step3) {
+                onNext();
+              }
+            }}
+          >
+            <Resultat />
+          </StepList.Step>
+        )}
       </StepList>
-      ;
     </div>
   );
 };
