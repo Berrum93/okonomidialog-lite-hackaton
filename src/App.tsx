@@ -46,7 +46,7 @@ export const App = () => {
           <StepList.Step
             id={`${stepId}-1`}
             variant={activeStep === 1 ? 'active' : 'passive'}
-            title={'Hva holder du på med?'}
+            title={'Inntekter'}
             stepNumber={1}
             onEdit={
               activeStep > 1 && activeStep < 4
@@ -63,7 +63,7 @@ export const App = () => {
           <StepList.Step
             id={`${stepId}-2`}
             variant={activeStep === 2 ? 'active' : 'passive'}
-            title={'Hva gjør du?'}
+            title={'Utgifter'}    
             stepNumber={2}
             onEdit={
               activeStep > 2 && activeStep < 4
